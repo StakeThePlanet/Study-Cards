@@ -40,7 +40,7 @@ The platform will be deployed [Specify deployment platform] to ensure free and w
 
 ## How to Contribute
 
-Contributions to the project are welcome. Please refer to the [CONTRIBUTING.md](link-to-contributing.md) file for guidelines on how to contribute.
+Contributions to the project are welcome. Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute.
 
 ## License
 
