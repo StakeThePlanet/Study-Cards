@@ -25,7 +25,7 @@ const App = () => {
     fetchfood()
   
   }, [])
-  console.log(bevs)
+  console.log(bevs, food, users)
 
   async function fetchUsers(){
     const {data} = await supabase
@@ -44,7 +44,7 @@ const App = () => {
     const {data} = await supabase
       .from('food')
       .select('*')
-      setBeverages(data)
+      setFood(data)
     }
      
 
