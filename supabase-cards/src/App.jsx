@@ -25,7 +25,7 @@ const App = () => {
     fetchfood()
   
   }, [])
-  console.log(bevs, food, users)
+
 
   async function fetchUsers(){
     const {data} = await supabase
@@ -49,7 +49,8 @@ const App = () => {
      
 
   return (
-    <div>
+    <div>:\
+    <h1>USERS:</h1>
       <table>
         <thead>
           <tr>
@@ -72,7 +73,59 @@ const App = () => {
         )} 
         </tbody>
       </table>
+
+      <h1>FOOD:</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>drop_line</th>
+            <th>allergy</th>
+            <th>mies_en_place</th>
+            <th>type</th>
+          </tr>
+        </thead>
+        <tbody>
+        {food.map((food) =>
+          <tr key={food.id}>
+              <td>{food.id}</td>
+              <td>{food.name}</td>
+              <td>{food.drop_line}</td>
+              <td>{food.allergy}</td>
+              <td>{food.mies_en_place}</td>
+              <td>{food.type}</td>
+          </tr>
+        )} 
+        </tbody>
+      </table>
+      <h1>BEVERAGES:</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>spirit</th>
+            <th>ingredients</th>
+            <th>drop_line</th>
+            <th>allergy</th>
+          </tr>
+        </thead>
+        <tbody>
+        {bevs.map((bevs) =>
+          <tr key={bevs.id}>
+              <td>{bevs.id}</td>
+              <td>{bevs.name}</td>
+              <td>{bevs.main_Spirit}</td>
+              <td>{bevs.ingredients}</td>
+              <td>{bevs.drop_line}</td>
+              <td>{bevs.allergy}</td>
+          </tr>
+        )} 
+        </tbody>
+      </table>
     </div>
+    
   )
 }
 
