@@ -88,8 +88,8 @@ const App = () => {
         </thead>
         <tbody>
         {food.map((food) =>
-          <tr key={food.id}>
-              <td>{food.id}</td>
+          <tr key={food.food_id}>
+              <td>{food.food_id}</td>
               <td>{food.name}</td>
               <td>{food.drop_line}</td>
               <td>{food.allergy}</td>
