@@ -6,34 +6,46 @@ import { supabase } from './assets/createClient'
 const App = () => {
 
   const [users, setUsers] =  useState([])
-
-  useEffect(() => {
-    fetchUsers()
-  
-  }, [])
-  
+  const [user, setUser] = useState({
+    name:'', job:'', company:''
+  })
   const [bevs, setBeverages] =  useState([])
-
-  useEffect(() => {
-    fetchbeverages()
-  
-  }, [])
-
   const [food, setFood] =  useState([])
 
   useEffect(() => {
+    fetchUsers()
+    fetchbeverages()
     fetchfood()
-  
   }, [])
 
 
+///FETCHES
+// Fetch data from the API
+
   async function fetchUsers(){
+    const company_dropdown = document.getElementById('companyDropdown');
+    const job_dropdown = document.getElementById('jobDropdown');
     const {data} = await supabase
       .from('users')
       .select('*')
       setUsers(data)
-    }
-
+    // Use a Set to keep track of unique company names
+    const uniqueCompanyNames = [...new Set(data.map(item => item.company))];
+    const uniquejobs = [...new Set(data.map(item => item.job))];
+    // Create options for each unique company name
+    uniqueCompanyNames.forEach(companyName => {
+      const option = document.createElement('option');
+      option.value = companyName;
+      option.text = companyName;
+      company_dropdown.add(option);
+  });
+    uniquejobs.forEach(jobName => {
+      const option = document.createElement('option');
+      option.value = jobName;
+      option.text = jobName;
+      job_dropdown.add(option);
+  });
+  }
   async function fetchbeverages(){
     const {data} = await supabase
       .from('beverages')
@@ -46,10 +58,33 @@ const App = () => {
       .select('*')
       setFood(data)
     }
-     
+
+    
+  function handleChange(e){
+    setUser(prevFormData=>{
+      return{
+        ...prevFormData,
+        [e.target.name]:e.target.value
+      }
+    })
+  }
 
   return (
-    <div>:\
+    <div>
+      <form>
+      <label for="name">user name:</label>
+        <input
+          type="text"
+          placeholder="name"
+          name="name"
+          onChange={handleChange}
+        /><br/>
+        <label for="job">Select a Job:</label>
+        <select id="jobDropdown"></select><br/>
+        <label for="companyDropdown">Select a Company:</label>
+        <select id="companyDropdown"></select>
+      </form>
+
     <h1>USERS:</h1>
       <table>
         <thead>
