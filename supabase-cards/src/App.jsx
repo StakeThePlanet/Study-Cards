@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-import React from 'react'
+// import React from 'react'
 import { supabase } from './assets/createClient'
 
 const App = () => {
-
   const [users, setUsers] =  useState([])
   const [user, setUser] = useState({
     name:'', job:'', company:''
@@ -16,35 +15,46 @@ const App = () => {
     fetchUsers()
     fetchbeverages()
     fetchfood()
+    // fetchCompanyNames()
   }, [])
 
+  function fetchCompanyNames(){
+   
+  }
+  
 
 ///FETCHES
-// Fetch data from the API
+
+//TODO remove the functionality to get company names outside of this function so it doesnt run every time it fetches an user.
 
   async function fetchUsers(){
-    const company_dropdown = document.getElementById('companyDropdown');
-    const job_dropdown = document.getElementById('jobDropdown');
+
     const {data} = await supabase
       .from('users')
       .select('*')
       setUsers(data)
     // Use a Set to keep track of unique company names
+    const company_dropdown = document.getElementById('companyDropdown');
+    const job_dropdown =  document.getElementById('jobDropdown');
+  
     const uniqueCompanyNames = [...new Set(data.map(item => item.company))];
+    console.log(uniqueCompanyNames)
     const uniquejobs = [...new Set(data.map(item => item.job))];
-    // Create options for each unique company name
-    uniqueCompanyNames.forEach(companyName => {
+    console.log(uniquejobs)
+     uniqueCompanyNames.forEach(companyName => {
       const option = document.createElement('option');
       option.value = companyName;
       option.text = companyName;
       company_dropdown.add(option);
-  });
+    });
     uniquejobs.forEach(jobName => {
       const option = document.createElement('option');
       option.value = jobName;
       option.text = jobName;
       job_dropdown.add(option);
-  });
+    });
+    // Create options for each unique company name
+   
   }
   async function fetchbeverages(){
     const {data} = await supabase
@@ -72,17 +82,18 @@ const App = () => {
   return (
     <div>
       <form>
-      <label for="name">user name:</label>
+      <label>user name:</label>
         <input
           type="text"
           placeholder="name"
           name="name"
           onChange={handleChange}
         /><br/>
-        <label for="job">Select a Job:</label>
+        <label >Select a Company:</label>
+        <select id="companyDropdown"></select><br/>
+        <label >Select a Job:</label>
         <select id="jobDropdown"></select><br/>
-        <label for="companyDropdown">Select a Company:</label>
-        <select id="companyDropdown"></select>
+       
       </form>
 
     <h1>USERS:</h1>
