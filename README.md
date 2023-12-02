@@ -88,8 +88,15 @@ npx run dev
 ```
 
 
-HOW TO DEPLOY:(netlify init)
+##HOW TO DEPLOY:
+```
+npm run build
+```
+```
+netlify deploy
 
-netlify deploy (to test it out)
-then
+```
+
+```
 netlify deploy --prod
+```

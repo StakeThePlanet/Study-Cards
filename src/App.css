@@ -62,3 +62,21 @@ table th, table td{
 .read-the-docs {
   color: #888;
 }
+
+@media screen and (max-width: 480px) {
+  .switch {
+    width: 40px;
+    height: 24px;
+  }
+
+  .slider {
+    border-radius: 12px; /* Adjusted for smaller size */
+  }
+
+  .slider:before {
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+  }
+}
