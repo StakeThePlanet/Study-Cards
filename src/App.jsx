@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 // import React from 'react'
 import { supabase } from './assets/createClient'
+import Navbar  from './components/Navbar'
 
 const App = () => {
   const [users, setUsers] =  useState([])
@@ -81,6 +82,7 @@ const App = () => {
 
   return (
     <div>
+    <Navbar/>
       <form>
       <label>user name:</label>
         <input

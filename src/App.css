@@ -1,3 +1,8 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+
 table{
   border-collapse: collapse;
   max-width: 900px;
@@ -5,9 +10,14 @@ table{
   margin: 2rem auto;
 }
 
+th {
+ background-color:#ffd6e2;
+ color: #fff;
+}
 table th, table td{
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.5em 1em;
+  text-align: left;
 }
 
 
