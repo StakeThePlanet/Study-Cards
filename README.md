@@ -86,3 +86,10 @@ This will create a new React project using Vite as the build tool and install de
 npx run dev
 
 ```
+
+
+HOW TO DEPLOY:(netlify init)
+
+netlify deploy (to test it out)
+then
+netlify deploy --prod
