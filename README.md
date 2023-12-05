@@ -100,3 +100,47 @@ netlify deploy
 ```
 netlify deploy --prod
 ```
+
+schema
+
+Certainly! Here's a simplified schema for your backend database:
+
+1. **Users Table:**
+   - UserID (Primary Key)
+   - Username
+   - Password
+   - Role (Admin, Company Manager, Employee)
+   - CompanyID (Foreign Key referencing Company table)
+
+2. **Companies Table:**
+   - CompanyID (Primary Key)
+   - CompanyName
+   - ManagerID (Foreign Key referencing Users table)
+
+3. **Employees Table:**
+   - EmployeeID (Primary Key)
+   - FirstName
+   - LastName
+   - Role (Employee roles)
+   - UserID (Foreign Key referencing Users table)
+   - CompanyID (Foreign Key referencing Companies table)
+
+4. **Food Table:**
+   - FoodID (Primary Key)
+   - Description
+   - Mise (assuming this is a list of ingredients)
+   - CompanyID (Foreign Key referencing Companies table)
+
+5. **Beverage Table:**
+   - BeverageID (Primary Key)
+   - Description
+   - Mise (assuming this is a list of ingredients)
+   - CompanyID (Foreign Key referencing Companies table)
+
+6. **Allergy Table:**
+   - AllergyID (Primary Key)
+   - AllergyName
+   - FoodID (Foreign Key referencing Food table)
+   - BeverageID (Foreign Key referencing Beverage table)
+
+This structure allows you to associate users with companies, employees with specific companies, and link food and beverages to their respective companies. The allergy table connects allergies to specific food or beverage items. Remember to add appropriate indexes, constraints, and relationships based on your database management system.
