@@ -1,7 +1,14 @@
 import  { useState } from 'react';
 import './Navbar.css'; // Import a CSS file for styling
+import '../App.css'
 
 const Navbar = () => {
+  //modal state
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+  
+  //darkmode state
   const [isDarkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {

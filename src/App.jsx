@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 // import React from 'react'
 import { supabase } from './assets/createClient'
 import Navbar  from './components/Navbar'
+import FlipCard from './components/FlipCard'
 
 const App = () => {
   const [users, setUsers] =  useState([])
@@ -80,6 +81,13 @@ const App = () => {
     })
   }
 
+    // Function to render FlipCard components based on data
+    const renderFlipCards = (data) => {
+      return data.map((cardData, index) => (
+        <FlipCard key={index} frontContent={cardData.frontContent} backContent={cardData.backContent} />
+      ));
+    };
+
   return (
     <div>
     <Navbar/>
@@ -88,7 +96,7 @@ const App = () => {
         <input
           type="text"
           placeholder="name"
-          name="name"
+          className="name"
           onChange={handleChange}
         /><br/>
         <label >Select a Company:</label>
@@ -97,6 +105,8 @@ const App = () => {
         <select id="jobDropdown"></select><br/>
        
       </form>
+
+      <FlipCard fromtContent="Front Content" backCOntent="Back Content"/>
 
     <h1>USERS:</h1>
       <table>
@@ -123,6 +133,7 @@ const App = () => {
       </table>
 
       <h1>FOOD:</h1>
+      {renderFlipCards(food)}
       <table>
         <thead>
           <tr>
