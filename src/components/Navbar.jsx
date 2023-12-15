@@ -1,13 +1,14 @@
 import  { useState } from 'react';
 import './Navbar.css'; // Import a CSS file for styling
 import '../App.css'
+import Modal from './modal/modal';
 
 const Navbar = () => {
   //modal state
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
-  
+
   //darkmode state
   const [isDarkMode, setDarkMode] = useState(false);
 
@@ -20,11 +21,11 @@ const Navbar = () => {
       <div className="brand">Supabase - Study Cards</div>
       <div className="nav-links">
         <a href="/">Home</a>
-        <a href="/about">About</a>
+        <a href="/Lessons">Lessons</a>
         <a href="/contact">Contact</a>
       </div>
       <div className="navbar-buttons">
-        <button className="login-button">Log In</button>
+        <button className="login-button" onClick={openModal}>Log In</button>
         <label className="switch">
           <input type="checkbox" onChange={toggleDarkMode} />
           <span className="slider round"></span>
