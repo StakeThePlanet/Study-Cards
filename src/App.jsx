@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { supabase } from './assets/createClient'
 import Navbar  from './components/Navbar'
-import FlipCard from './components/FlipCard'
 import 'virtual:windi.css'
 
 const App = () => {
@@ -88,24 +87,69 @@ const App = () => {
     })
   }
 
-    // Function to render FlipCard components based on data
-    const renderFlipCards = (data) => {
-      return data.map((cardData, index) => (
-        <FlipCard key={index} frontContent={cardData.frontContent} backContent={cardData.backContent} />
-      ));
-    };
+    // // Function to render FlipCard components based on data
+    // const renderFlipCards = (data) => {
+    //   return data.map((cardData, index) => (
+    //     <FlipCard key={index} frontContent={cardData.frontContent} backContent={cardData.backContent} />
+    //   ));
+    // };
 
   return (
     <Router>
     <div>
     <Navbar/>
         <br/>
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">Test form to Create Food:</h1>
+
       <form>
-      <label>user name:</label>
+   
+      <label>food name: </label>
         <input
           type="text"
-          placeholder="name"
-          className="name"
+          placeholder="food name"
+          className="food_name"
+          onChange={handleChange}
+        /><br/>
+      <label>drop line: </label>
+        <input
+          type="text"
+          placeholder="drop line"
+          className="drop_line"
+          onChange={handleChange}
+        /><br/>
+      <label>Prep Methods: </label>
+        <input
+          type="text"
+          placeholder="prep methods"
+          className="prep_methods"
+          onChange={handleChange}
+        /><br/>
+      <label>allergies: </label>
+        <input
+          type="text"
+          placeholder="allergies"
+          className="allergy"
+          onChange={handleChange}
+        /><br/>
+      <label>Mies: </label>
+        <input
+          type="text"
+          placeholder="mies en place"
+          className="mies_en_place"
+          onChange={handleChange}
+        /><br/>
+      <label>Beverage Pairing*: </label>
+        <input
+          type="text"
+          placeholder="brev pairing"
+          className="bev_pairing"
+          onChange={handleChange}
+        /><br/>
+      <label>Course<span className='italic'>(Cold App, Warm App, Entree, Dessert): </span></label>
+        <input
+          type="text"
+          placeholder="course"
+          className="type"
           onChange={handleChange}
         /><br/>
         <label >Select a Company:</label>
