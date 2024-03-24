@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { supabase } from './assets/createClient'
 import Navbar  from './components/Navbar'
 import FlipCard from './components/FlipCard'
+import 'virtual:windi.css'
 
 const App = () => {
 
@@ -98,11 +99,7 @@ const App = () => {
     <Router>
     <div>
     <Navbar/>
-    <Routes>
-          {/* <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} /> */}
-        </Routes>
+        <br/>
       <form>
       <label>user name:</label>
         <input
@@ -118,7 +115,7 @@ const App = () => {
        
       </form>
 
-      <FlipCard fromtContent="Front Content" backCOntent="Back Content"/>
+      <br/>    <br/>    <br/>
 
     <h1>USERS:</h1>
       <table>
@@ -143,9 +140,8 @@ const App = () => {
         )} 
         </tbody>
       </table>
-
+      <br/>    <br/>    <br/>
       <h1>FOOD:</h1>
-      {renderFlipCards(food)}
       <table>
         <thead>
           <tr>
@@ -170,6 +166,7 @@ const App = () => {
         )} 
         </tbody>
       </table>
+      <br/>    <br/>    <br/>
       <h1>BEVERAGES:</h1>
       <table>
         <thead>

@@ -1,6 +1,7 @@
 import  { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './Navbar.css'; // Import a CSS file for styling
-import '../App.css'
+import 'virtual:windi.css'
 // import { Link } from 'react-router-dom';
 // import Modal from './modal/modal';
 
