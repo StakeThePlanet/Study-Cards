@@ -1,15 +1,25 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 // import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { supabase } from './assets/createClient'
 import Navbar  from './components/Navbar'
 import FlipCard from './components/FlipCard'
+import Modal from './components/modal/modal'
 
 const App = () => {
+  //Modal state
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  //Users state
   const [users, setUsers] =  useState([])
   const [user, setUser] = useState({
     name:'', job:'', company:''
   })
+
+  //bev and food state
   const [bevs, setBeverages] =  useState([])
   const [food, setFood] =  useState([])
 
@@ -89,8 +99,14 @@ const App = () => {
     };
 
   return (
+    <Router>
     <div>
     <Navbar/>
+    <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+        </Switch>
       <form>
       <label>user name:</label>
         <input
@@ -184,7 +200,7 @@ const App = () => {
         </tbody>
       </table>
     </div>
-    
+    </Router>
   )
 }
 

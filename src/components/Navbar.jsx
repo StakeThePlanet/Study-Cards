@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import './Navbar.css'; // Import a CSS file for styling
 import '../App.css'
+import { Link } from 'react-router-dom';
 import Modal from './modal/modal';
 
 const Navbar = () => {
@@ -20,7 +21,9 @@ const Navbar = () => {
     <nav className={`navbar ${isDarkMode ? 'dark-mode' : ''}`}>
       <div className="brand">Supabase - Study Cards</div>
       <div className="nav-links">
-        <a href="/">Home</a>
+        <Link to="/">Home</Link>
+        <Link to="/Lessons">Lessons</Link>
+        <Link to="/Contact">Contact</Link>
         <a href="/Lessons">Lessons</a>
         <a href="/contact">Contact</a>
       </div>
