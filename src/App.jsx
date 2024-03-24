@@ -1,17 +1,13 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 // import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { supabase } from './assets/createClient'
 import Navbar  from './components/Navbar'
 import FlipCard from './components/FlipCard'
-import Modal from './components/modal/modal'
 
 const App = () => {
-  //Modal state
-  const [isModalOpen, setModalOpen] = useState(false);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+
 
   //Users state
   const [users, setUsers] =  useState([])
@@ -30,9 +26,9 @@ const App = () => {
     // fetchCompanyNames()
   }, [])
 
-  function fetchCompanyNames(){
+  // function fetchCompanyNames(){
    
-  }
+  // }
   
 
 ///FETCHES
@@ -102,11 +98,11 @@ const App = () => {
     <Router>
     <div>
     <Navbar/>
-    <Switch>
-          <Route path="/" exact component={Home} />
+    <Routes>
+          {/* <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-        </Switch>
+          <Route path="/contact" component={Contact} /> */}
+        </Routes>
       <form>
       <label>user name:</label>
         <input
