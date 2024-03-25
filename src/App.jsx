@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { supabase } from './assets/createClient'
 import Navbar  from './components/Navbar'
+import CreateFoodForm from './components/CreateFoodForm'
 import 'virtual:windi.css'
 
 const App = () => {
@@ -14,6 +15,8 @@ const App = () => {
   const [user, setUser] = useState({
     name:'', job:'', company:''
   })
+
+
 
   //bev and food state
   const [bevs, setBeverages] =  useState([])
@@ -99,65 +102,9 @@ const App = () => {
     <div>
     <Navbar/>
         <br/>
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">Test form to Create Food:</h1>
+    <CreateFoodForm />
 
-      <form>
-   
-      <label>food name: </label>
-        <input
-          type="text"
-          placeholder="food name"
-          className="food_name"
-          onChange={handleChange}
-        /><br/>
-      <label>drop line: </label>
-        <input
-          type="text"
-          placeholder="drop line"
-          className="drop_line"
-          onChange={handleChange}
-        /><br/>
-      <label>Prep Methods: </label>
-        <input
-          type="text"
-          placeholder="prep methods"
-          className="prep_methods"
-          onChange={handleChange}
-        /><br/>
-      <label>allergies: </label>
-        <input
-          type="text"
-          placeholder="allergies"
-          className="allergy"
-          onChange={handleChange}
-        /><br/>
-      <label>Mies: </label>
-        <input
-          type="text"
-          placeholder="mies en place"
-          className="mies_en_place"
-          onChange={handleChange}
-        /><br/>
-      <label>Beverage Pairing*: </label>
-        <input
-          type="text"
-          placeholder="brev pairing"
-          className="bev_pairing"
-          onChange={handleChange}
-        /><br/>
-      <label>Course<span className='italic'>(Cold App, Warm App, Entree, Dessert): </span></label>
-        <input
-          type="text"
-          placeholder="course"
-          className="type"
-          onChange={handleChange}
-        /><br/>
-        <label >Select a Company:</label>
-        <select id="companyDropdown"></select><br/>
-        <label >Select a Job:</label>
-        <select id="jobDropdown"></select><br/>
-       
-      </form>
+    
 
       <br/>    <br/>    <br/>
 
