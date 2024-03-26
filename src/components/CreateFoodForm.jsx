@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "virtual:windi.css";
 import { supabase } from "../assets/createClient";
-// import { Link } from 'react-router-dom';
-// import Modal from './modal/modal';
 
 const CreateFoodForm = () => {
   //food create form state
@@ -54,11 +51,14 @@ const CreateFoodForm = () => {
       alert("Failed to create new food item.");
     }
   };
+
+
+
   return (
     <>
       <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
         Test form to Create Food:
-      </h1>
+      </h1>  
       <div className="flex items-center justify-center h-screen">
   <form className="border border-gray-300 p-6 rounded-md max-w-md" onSubmit={handleSubmit}>
     <div className="flex flex-col space-y-4">
@@ -80,7 +80,7 @@ const CreateFoodForm = () => {
             value={formData.drop_line}
             onChange={handleChange}
           />
-          
+
           <label>Prep Methods: </label>
           <input
             type="text"
@@ -140,17 +140,15 @@ const CreateFoodForm = () => {
           Submit
         </button>
           </div>
-          
-        
+
+
     </div>
 
   </form>
     </div>
 
-{/* 
-      <form >
-        <div className="flex flex-col items-center">
-        
+
+      {/* <form onSubmit={handleSubmit}>
         <label>food name: </label>
           <input
             type="text"
@@ -209,7 +207,7 @@ const CreateFoodForm = () => {
           <label>
             Course
             <span className="italic">
-              (Cold App, Warm App, Entree, Dessert):{" "}
+              (Cold App, Warm App, Entree, Dessert):
             </span>
           </label>
           <input
@@ -227,7 +225,6 @@ const CreateFoodForm = () => {
         >
           Submit
         </button>
-        </div>
       </form> */}
     </>
   );

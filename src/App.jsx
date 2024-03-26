@@ -69,15 +69,6 @@ const App = () => {
     setFood(data);
   }
 
-  function handleChange(e) {
-    setUser((prevFormData) => {
-      return {
-        ...prevFormData,
-        [e.target.name]: e.target.value,
-      };
-    });
-  }
-
   // // Function to render FlipCard components based on data
   // const renderFlipCards = (data) => {
   //   return data.map((cardData, index) => (
@@ -85,70 +76,133 @@ const App = () => {
   //   ));
   // };
 
+  const sortTable = (columnIndex) => {
+    let table, rows, switching, i, x, y, shouldSwitch, direction;
+    table = document.querySelector("table");
+    switching = true;
+    // Set the sorting direction to ascending
+    direction = "asc";
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      for (i = 1; i < rows.length - 1; i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("td")[columnIndex];
+        y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+        if (direction === "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (direction === "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+    // Toggle the sorting direction
+    if (direction === "asc") {
+      direction = "desc";
+    } else {
+      direction = "asc";
+    }
+  }
+
   return (
     <Router>
       <div>
         <Navbar />
         <br />
-        <div className="grid grid-cols-2 gap-6">
-  <form className="bg-white rounded-lg shadow-lg p-6">
-  <CreateFoodForm />
-  </form>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <CreateFoodForm />
+          </div>
 
-  <div>
-    
-    <h1>FOOD:</h1>
-    <table className="border-collapse border border-gray-300">
-  <thead>
-    <tr>
-      <th className="border border-gray-300 px-4 py-2">ID</th>
-      <th className="border border-gray-300 px-4 py-2">Name</th>
-      <th className="border border-gray-300 px-4 py-2">Drop Line</th>
-      <th className="border border-gray-300 px-4 py-2">Allergy</th>
-      <th className="border border-gray-300 px-4 py-2">Mies en Place</th>
-      <th className="border border-gray-300 px-4 py-2">Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    {food.map((food) => (
-    <tr key={food.food_id} className="border border-gray-300">
-      <td className="border border-gray-300 px-4 py-2">{food.food_id}</td>
-      <td className="border border-gray-300 px-4 py-2">{food.food_name}</td>
-      <td className="border border-gray-300 px-4 py-2">{food.drop_line}</td>
-      <td className="border border-gray-300 px-4 py-2">{food.allergy}</td>
-      <td className="border border-gray-300 px-4 py-2">{food.mies_en_place}</td>
-      <td className="border border-gray-300 px-4 py-2">{food.type}</td>
-    </tr>
-    ))}
-  </tbody>
-</table>
-    
-  </div>
-</div>
-
-        
+          <div>
+            <h1>FOOD:</h1>
+            <table className="border-collapse border border-gray-300">
+              <thead>
+                <tr>
+                  <th className="border border-gray-300 px-4 py-2">ID</th>
+                  <th className="border border-gray-300 px-4 py-2">Name</th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Drop Line
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">Allergy</th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Mies en Place
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">Type</th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    bev pairing
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {food.map((food) => (
+                  <tr key={food.food_id} className="border border-gray-300">
+                    <td className="border border-gray-300 px-4 py-2">
+                      {food.food_id}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {food.food_name}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {food.drop_line}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {food.allergy}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {food.mies_en_place}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {food.type}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {food.bev_pairing}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
         <br /> <br /> <br />
-        <p>🍽️ Are you ready for a culinary adventure? Introducing our upcoming app designed exclusively for restaurant owners and managers.
-
-🚧 Currently under construction, this revolutionary platform is tailored to keep your staff informed about the latest additions to your menu, ensuring everyone stays up-to-date with your restaurant's gastronomic journey.
-
-🍲 Stay tuned as we craft an intuitive experience that empowers your team to explore and embrace new food items effortlessly. From mouth-watering entrees to delectable desserts, our app will be your go-to destination for culinary innovation.
-
-🔧 We're hard at work behind the scenes to bring you a seamless solution that enhances communication and excitement within your restaurant's kitchen. Get ready to elevate your dining experience like never before!
-
-Keep an eye out for updates as we prepare to launch this game-changing app. Your restaurant's culinary revolution starts here! 🚀👨‍🍳👩‍🍳</p>
+        <p>
+          🍽️ Are you ready for a culinary adventure? Introducing our upcoming
+          app designed exclusively for restaurant owners and managers. 🚧
+          Currently under construction, this revolutionary platform is tailored
+          to keep your staff informed about the latest additions to your menu,
+          ensuring everyone stays up-to-date with your restaurant's gastronomic
+          journey. 🍲 Stay tuned as we craft an intuitive experience that
+          empowers your team to explore and embrace new food items effortlessly.
+          From mouth-watering entrees to delectable desserts, our app will be
+          your go-to destination for culinary innovation. 🔧 We're hard at work
+          behind the scenes to bring you a seamless solution that enhances
+          communication and excitement within your restaurant's kitchen. Get
+          ready to elevate your dining experience like never before! Keep an eye
+          out for updates as we prepare to launch this game-changing app. Your
+          restaurant's culinary revolution starts here! 🚀👨‍🍳👩‍🍳
+        </p>
         <h1>USERS:</h1>
         <table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th >ID</th>
               <th>Name</th>
               <th>Job</th>
               <th>Company</th>
               <th>Company ID</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {users.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
@@ -161,7 +215,6 @@ Keep an eye out for updates as we prepare to launch this game-changing app. Your
           </tbody>
         </table>
         <br /> <br /> <br />
-        
         <br /> <br /> <br />
         <h1>BEVERAGES:</h1>
         <table>
