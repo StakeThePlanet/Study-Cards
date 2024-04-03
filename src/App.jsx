@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { supabase } from "./assets/createClient";
 import Navbar from "./components/Navbar";
+import MyTable from "./components/MyTable";
 import CreateFoodForm from "./components/CreateFoodForm";
 import "virtual:windi.css";
 
@@ -69,111 +70,34 @@ const App = () => {
     setFood(data);
   }
 
-  // // Function to render FlipCard components based on data
-  // const renderFlipCards = (data) => {
-  //   return data.map((cardData, index) => (
-  //     <FlipCard key={index} frontContent={cardData.frontContent} backContent={cardData.backContent} />
-  //   ));
-  // };
-
-  const sortTable = (columnIndex) => {
-    let table, rows, switching, i, x, y, shouldSwitch, direction;
-    table = document.querySelector("table");
-    switching = true;
-    // Set the sorting direction to ascending
-    direction = "asc";
-    while (switching) {
-      switching = false;
-      rows = table.rows;
-      for (i = 1; i < rows.length - 1; i++) {
-        shouldSwitch = false;
-        x = rows[i].getElementsByTagName("td")[columnIndex];
-        y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-        if (direction === "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        } else if (direction === "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-      if (shouldSwitch) {
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-      }
-    }
-    // Toggle the sorting direction
-    if (direction === "asc") {
-      direction = "desc";
-    } else {
-      direction = "asc";
-    }
-  }
+   // Function to sort the form data based on a specific property
+   const sortByProperty = (property) => {
+    const sortedData = [...formData].sort((a, b) => {
+      if (a[property] < b[property]) return -1;
+      if (a[property] > b[property]) return 1;
+      return 0;
+    });
+    setFormData(sortedData);
+  };
 
   return (
     <Router>
       <div>
         <Navbar />
         <br />
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <CreateFoodForm />
-          </div>
+       
+        <div className="flex gap-4">
+  <div className="w-1/3">
+  <CreateFoodForm />
+  </div>
+  <div className="w-2/3">
+  <MyTable data={food}/>
+  </div>
+</div>
 
-          <div>
-            <h1>FOOD:</h1>
-            <table className="border-collapse border border-gray-300">
-              <thead>
-                <tr>
-                  <th className="border border-gray-300 px-4 py-2">ID</th>
-                  <th className="border border-gray-300 px-4 py-2">Name</th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Drop Line
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2">Allergy</th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Mies en Place
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2">Type</th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    bev pairing
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {food.map((food) => (
-                  <tr key={food.food_id} className="border border-gray-300">
-                    <td className="border border-gray-300 px-4 py-2">
-                      {food.food_id}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                      {food.food_name}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                      {food.drop_line}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                      {food.allergy}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                      {food.mies_en_place}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                      {food.type}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                      {food.bev_pairing}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+         
+
+          
         <br /> <br /> <br />
         <p>
           🍽️ Are you ready for a culinary adventure? Introducing our upcoming
