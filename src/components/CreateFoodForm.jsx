@@ -54,9 +54,6 @@ const CreateFoodForm = () => {
 
   return (
     <>
-      <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
-        Test form to Create Food:
-      </h1>
       <div className="flex items-center justify-center h-screen">
         <form
           className="border border-gray-300 p-6 rounded-md max-w-md"

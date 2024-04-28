@@ -28,11 +28,20 @@ const App = () => {
     // fetchCompanyNames()
   }, []);
 
-  // function fetchCompanyNames(){
-
-  // }
+  useEffect(() => {
+    // Initialize Datadog RUM
+    (function(l) {
+      if (l.search === "") return;
+      var w = window;
+      var dq = w.ddq = w.ddq || [];
+      dq.push(['setClientToken', 'YOUR_CLIENT_TOKEN']);
+      dq.push(['data', { 'application_id': 'YOUR_APPLICATION_ID' }]);
+      dq.push(['send', l]);
+    })(window.location.search);
+  }, []);
 
   ///FETCHES
+
 
   //TODO remove the functionality to get company names outside of this function so it doesnt run every time it fetches an user.
 
@@ -80,18 +89,140 @@ const App = () => {
     setFormData(sortedData);
   };
 
+  const handleDelete = () => {
+    // Call backend API to delete entry
+    fetch(`/api/delete/${data.id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (response.ok) {
+          // If deletion is successful, trigger onDelete callback
+          onDelete(data.id);
+        } else {
+          console.error('Error deleting entry:', response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting entry:', error);
+      });
+  };
+
   return (
     <Router>
       <div>
         <Navbar />
         <br />
-       
+        <span className="w-screen p-4">
+      <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+        Test form to Create Food:
+      </h1>
+    </span>
         <div className="flex gap-4">
   <div className="w-1/3">
   <CreateFoodForm />
   </div>
   <div className="w-2/3">
-  <MyTable data={food}/>
+
+  <h1>FOOD:</h1>
+    <table className="border-collapse border border-gray-300">
+  <thead>
+    <tr>
+      <th className="border border-gray-300 px-4 py-2">ID</th>
+      <th className="border border-gray-300 px-4 py-2">Name</th>
+      <th className="border border-gray-300 px-4 py-2">Drop Line</th>
+      <th className="border border-gray-300 px-4 py-2">Allergy</th>
+      <th className="border border-gray-300 px-4 py-2">Mies en Place</th>
+      <th className="border border-gray-300 px-4 py-2">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {food.map((food) => (
+    <tr key={food.food_id} className="border border-gray-300">
+      <td className="border border-gray-300 px-4 py-2">{food.food_id}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.food_name}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.drop_line}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.allergy}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.mies_en_place}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.type}</td>
+      <td>
+      <div className="flex flex-col items-center">
+      <button className="w-full bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded" onClick={handleDelete}>Edit</button>
+      <button className="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={handleDelete}>Delete</button>
+      </div>
+        
+      </td>
+    </tr>
+    ))}
+  </tbody>
+</table>
+
+{/* <div className="flex flex-col items-center justify-center h-screen space-y-6">
+  <div className="text-center animate-fadeIn">
+    <p className="text-2xl">🍽️ Are you ready for a culinary adventure?</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-200">
+    <p className="text-2xl">Introducing our upcoming app for restaurant owners and managers.</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-400">
+    <p className="text-2xl">🚧 Currently under construction, this revolutionary platform...</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-600">
+    <p className="text-2xl">...is tailored to keep your staff informed about the latest additions to your menu.</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-800">
+    <p className="text-2xl">🍲 Stay tuned as we craft an intuitive experience...</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-1000">
+    <p className="text-2xl">...that empowers your team to explore and embrace new food items effortlessly.</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-1200">
+    <p className="text-2xl">From mouth-watering entrees to delectable desserts...</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-1400">
+    <p className="text-2xl">...our app will be your go-to destination for culinary innovation.</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-1600">
+    <p className="text-2xl">🔧 We're hard at work behind the scenes to bring you a seamless solution...</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-1800">
+    <p className="text-2xl">...that enhances communication and excitement within your restaurant's kitchen.</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-2000">
+    <p className="text-2xl">Get ready to elevate your dining experience like never before!</p>
+  </div>
+  <div className="text-center animate-fadeIn delay-2200">
+    <p className="text-2xl">🚀👨‍🍳👩‍🍳</p>
+  </div>
+</div> */}
+
+  {/* <h1>FOOD:</h1>
+    <table className="border-collapse border border-gray-300">
+  <thead>
+    <tr>
+      <th className="border border-gray-300 px-4 py-2">ID</th>
+      <th className="border border-gray-300 px-4 py-2">Name</th>
+      <th className="border border-gray-300 px-4 py-2">Drop Line</th>
+      <th className="border border-gray-300 px-4 py-2">Allergy</th>
+      <th className="border border-gray-300 px-4 py-2">Mies en Place</th>
+      <th className="border border-gray-300 px-4 py-2">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {foodEntries.map((food) => (
+      
+    <tr key={food.food_id} className="border border-gray-300">
+      <td className="border border-gray-300 px-4 py-2">{food.food_id}</td>
+      {console.log("test",foodEntries)}
+      <td className="border border-gray-300 px-4 py-2">{food.food_name}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.drop_line}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.allergy}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.mies_en_place}</td>
+      <td className="border border-gray-300 px-4 py-2">{food.type}</td>
+    </tr>
+    ))}
+  </tbody>
+</table> */}
   </div>
 </div>
 
@@ -99,22 +230,8 @@ const App = () => {
 
           
         <br /> <br /> <br />
-        <p>
-          🍽️ Are you ready for a culinary adventure? Introducing our upcoming
-          app designed exclusively for restaurant owners and managers. 🚧
-          Currently under construction, this revolutionary platform is tailored
-          to keep your staff informed about the latest additions to your menu,
-          ensuring everyone stays up-to-date with your restaurant's gastronomic
-          journey. 🍲 Stay tuned as we craft an intuitive experience that
-          empowers your team to explore and embrace new food items effortlessly.
-          From mouth-watering entrees to delectable desserts, our app will be
-          your go-to destination for culinary innovation. 🔧 We're hard at work
-          behind the scenes to bring you a seamless solution that enhances
-          communication and excitement within your restaurant's kitchen. Get
-          ready to elevate your dining experience like never before! Keep an eye
-          out for updates as we prepare to launch this game-changing app. Your
-          restaurant's culinary revolution starts here! 🚀👨‍🍳👩‍🍳
-        </p>
+        
+       
         <h1>USERS:</h1>
         <table>
           <thead>
